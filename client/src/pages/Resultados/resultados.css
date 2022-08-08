@@ -1,0 +1,10 @@
+/* .tarjeta-resultados{
+    margin-bottom: 30px;
+    border-radius: 10%;
+} */
+
+.tarjeta-resultados h6{
+    font-size: 1.2em;
+    margin-left: 15px;
+    max-width: 90%;
+}

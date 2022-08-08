@@ -1,0 +1,155 @@
+.nav-bar{
+    margin-bottom: 5em;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-content{
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    padding: 10px 30px;
+    background-color: black;
+    border-radius: 10px;
+    
+    
+    margin: auto;
+    padding:10px 30px
+}
+
+nav .brand{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #e50914;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+nav .brand:hover{
+    color: #cd040e;
+}
+
+.navbar .nav-link{
+    font-size: 1.2rem;
+    margin-left:.5em;
+    margin-right: .5em;
+}
+
+.nav-group{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-menu{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;    
+    list-style: none;
+    color: lightgray;
+    padding:0;
+    margin:0;
+    width: 60%;
+}
+
+.nav-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0 10px;
+    height: 100%;
+}
+
+/* form{
+    width: 50%;
+} */
+
+.active{
+    background-color:gray;
+    color:black;
+    border-radius:10px;
+    text-align: center;
+}
+
+.active a{
+    font-weight: bold;
+    color:black
+}
+
+.toggle{
+    color:white;
+    background: none;
+    border:none;
+    font-size: 2em;
+    padding: 0 20px;
+    line-height: 60px;
+    display:none
+}
+
+/* Medias Query */
+
+@media (max-width:1000px){
+
+    .nav-content{
+        justify-content: space-between;
+        
+    }    
+   
+    .navbar .brand{
+        font-size:1.8rem;
+    }
+
+
+    .toggle{
+        display: block;
+    }
+
+    .nav-group{
+        position:fixed;
+        display:flex;
+        flex-direction: column-reverse;
+        align-items:center;
+        justify-content: flex-start;     
+        left:100%; 
+        text-align: center;  
+
+        padding-top: 20px;        
+        z-index: 20;
+        top:80px;
+        height:calc(100% - 80px);
+        width:70vw;
+        background-color: #1e1e1efa;
+        border-radius: 10px;
+        transition: left 0.5s;
+    }
+
+    .navbar-menu{
+        display:flex;               
+        flex-direction: column;
+        justify-content:space-around;
+        align-items: center;   
+
+        height: 100%;
+        width: 100%;
+        margin:30px;     
+        color: lightgray;
+        
+    }
+
+    .nav-item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:100%;
+        width:100%
+    }
+
+    .nav_visible{
+        left:30vw;
+    }
+
+}
