@@ -30,6 +30,10 @@ function Detalle(){
     useEffect(()=>{
         dispatch(getDetails(movieID,'movie'))
         setDetails(stateDetails)
+
+        return function unMount(){
+            setDetails({})
+        }
       },[dispatch,stateDetails,movieID])
 
     return(

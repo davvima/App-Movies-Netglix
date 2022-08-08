@@ -27,7 +27,7 @@ const Hero = () => {
     {moviesList.filter((e,idx)=>idx<5).map((oneMovie, idx)=>{         
       return(
         
-         <Link className ="movie-slider" key={idx} to={`/detalle?movieID=${oneMovie.id}`}>
+         <Link className ="movie-slider" key={idx} to={`/detalle/${oneMovie.id}`}>
                 <h2 className="heroTitle">{oneMovie.title}</h2>
                 <img className="poster-slider" src={`https://image.tmdb.org/t/p/w500/${oneMovie.backdrop_path}`}  alt="poster" />                
          </Link>

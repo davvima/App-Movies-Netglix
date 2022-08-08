@@ -41,11 +41,18 @@ export const removeFavorites = (id) =>{
 ////////////////////////////////////////DETAILS
 
 export const getDetails = (id,category) => {
+   
     return async (dispatch)=>{
+        if(id && category){
     const response = await axiosClient.get(`http://localhost:4000/movies/${id}?category=${category}`)
     return dispatch ({
         type:'GET_DETAILS',
         payload:response
     })
-}
-}
+    }else{    
+        return dispatch ({
+            type:'GET_DETAILS',
+            payload:{}
+        })
+    }
+}}
