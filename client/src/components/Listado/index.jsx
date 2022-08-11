@@ -5,24 +5,26 @@ import { useDispatch, useSelector } from 'react-redux';
 //Styles
 import './listado.css'
 import Grid from "components/Grid/Grid";
-import { getContent } from "../../redux/actions";
+import { getCategories, getContent } from "../../redux/actions";
 
 function Listado({category,type}){
  
  const [moviesList, setMoviesList] = useState([]);
+ const [categories, setCategories] = useState([]);
  const dispatch =  useDispatch()
  const contentList=useSelector(state=>state.contentList[category])
+ const StateCategories=useSelector(state=>state.categories)
 
 
 useEffect(()=>{
-
     if(contentList.length===0) dispatch(getContent(category, type))
-     
-  setMoviesList(contentList)        
-        
+  setMoviesList(contentList)            
 },[dispatch, contentList])  
 
-console.log('content',contentList)
+useEffect(()=>{
+  if(categories.length===0) dispatch(getCategories(category, type))   
+  setCategories(StateCategories)     
+},[dispatch, StateCategories]) 
 
 console.log('soy movies', moviesList)
 

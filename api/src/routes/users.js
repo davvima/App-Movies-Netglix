@@ -1,6 +1,5 @@
 const express = require('express');
-const passport = require('passport');
-const pool = require('../database');
+const { addUser, listUsers, deleteUser } = require('../controllers/users');
 const { checkAuth } = require('../lib/auth');
 const router = express.Router();
 
@@ -9,33 +8,41 @@ const router = express.Router();
 
 router.get('/',checkAuth(['admin']), async (req, res)=>{
 
-    let response = await pool.query('SELECT * FROM users')
-    const users = response.filter(e=>{
-        return {
-            id:e.id,
-            name:e.name,
-            email:e.email,
-            password:e.password,
-            role:e.role
-        }
-    })
-
-    res.json(users)
+     const users = await listUsers()
+     return res.json(users)
 })
 
 /////////////////////////////////////////////Agregar Usuarios
 
-router.post('/',checkAuth(['admin']), async (req, res,next)=>{
-    passport.authenticate('local.signup')(req, res, next);
-    res.json({
-    message: 'Registro exitoso',
+router.post('/',checkAuth(['admin']), async(req, res,next)=>{
+    try{
+        const response = await addUser(req, res, next)
+        res.send(response)
+    }catch(e){
+        console.log(e)
+        return res.status(400).json({ error: e.message })
+    }
   });
-}
-)
 
-///////////////////////////////////////////Eliminar Usuarios
 
-router.delete('/',checkAuth(['admin']), async (req, res)=>{
+///////////////////////////////////////////Modificar Usuarios
+
+// router.
+
+// ///////////////////////////////////////////Eliminar Usuarios
+
+router.delete('/:id',checkAuth(['admin']), async (req, res)=>{
+    const {id} = req.params
+    try{
+        const response = await deleteUser(id)
+        console.log(response)
+        res.json('Usuario eliminado exitosamente')
+
+    }catch(e){
+        console.log(e)
+        return res.status(400).json(e.message)
+    }
+    
     
 })
 

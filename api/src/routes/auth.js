@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport')
 const jwt = require('jsonwebtoken');
+const { addUser } = require('../../../../Curso Henry/FT-M3-master/CP-M3/CPM3/models/model');
+const pool = require('../database');
 
 //LOGIN
 router.post('/login', (req, res, next) => {
     passport.authenticate('local.login',  
      async (err, user, info) => {
-      console.log(err,user,info)
         try{
             if(err || !user){
                 const error = new Error(info)
@@ -18,13 +19,14 @@ router.post('/login', (req, res, next) => {
                 { session: false },
                 async (error) => {
                   if (error) return next(error);
-                  console.log(user)
+                  console.log(req.user)
     
                   const userForToken = { id: user.id,name:user.name, role: user.role };
                   const token = jwt.sign(userForToken, 'mySecret');
-    
+                  
                   return res.json({ 
                     name:user.name,
+                    role:user.role,
                     token });
                 }
               );
@@ -34,16 +36,43 @@ router.post('/login', (req, res, next) => {
    })(req, res, next);
 })
 
+router.get('/login',(req,res)=>{
+  console.log(req.user)
+  if(req.user){
+    res.json({loggedIn:true, user:req.user})
+  }else{
+    res.json({loggedIn:false})
+  }
+})
+
     
 
 //REGISTER
-router.post('/signup', (req, res, next)=>{
+router.post('/signup', async (req, res, next)=>{
 
-passport.authenticate('local.signup')(req, res, next);
-    res.json({
-    message: 'Registro exitoso',
-  });
+  const {email} = req.body
+
+  let users = await pool.query('SELECT * FROM users')
+  console.log(email)
+
+  const verificarEmail = users.find(u => u.email === email)
+
+  if(!verificarEmail){
+
+    passport.authenticate('local.signup')(req, res, next);
+
+    return res.json(`Usuario ${email} creado correctamente`)
+  }
+
+  const error = new Error('El usuario ya existe') 
+  return res.status(400).json(error.message)
 }
+
+// passport.authenticate('local.signup')(req, res, next);
+//     res.json({
+//     message: 'Registro exitoso',
+//   });
+
 )
 
 router.get('/profile',(req,res) =>{

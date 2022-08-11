@@ -17,7 +17,8 @@ const Grid = ({list, category}) => {
                                 id={el.id}
                                 poster_path={el.poster_path}
                                 overview={el.overview}
-                                backdrop_path={el.backdrop_path}
+                                backdrop_path={el.backdrop_path?el.backdrop_path:el.poster_path}
+                                created={el.created}
                             />
                        </div>
                     )

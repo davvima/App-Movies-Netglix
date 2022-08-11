@@ -17,10 +17,10 @@ function AcercaDe() {
             <br />
             <br />
             <div className='about-links'>
-            <button class="button" onClick={()=>window.open('https://www.linkedin.com/in/david-freites-frontend-developer','_blank')}> LinkedIn
+            <button className="button" onClick={()=>window.open('https://www.linkedin.com/in/david-freites-frontend-developer','_blank')}> LinkedIn
             </button>
 
-            <button class="button" onClick={()=>window.open('https://github.com/davvima','_blank')}> Github
+            <button className="button" onClick={()=>window.open('https://github.com/davvima','_blank')}> Github
             </button>
 
             </div>

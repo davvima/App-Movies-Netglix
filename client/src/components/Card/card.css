@@ -4,10 +4,21 @@
     width: 100%;
     cursor: pointer;
 }
-.posterHover{
-    object-fit: cover;
+
+.cardHover{
     height: 100%;
     width: 100%;
+    min-height: 100%;
+}
+.posterHover{
+    object-fit:cover;
+    height: 100%;
+    width: 100%;
+}
+.img-container{
+    max-height: 50%;
+    width: 100%;
+    overflow: hidden;
 }
 
 iframe{
@@ -35,6 +46,8 @@ iframe{
     font-size:1rem;
     font-weight: bold;
     color: white;
+    line-height: 1;
+    margin: 0;
 }
 
 .itemInfo a{

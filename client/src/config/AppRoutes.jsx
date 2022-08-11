@@ -12,6 +12,9 @@ import Favoritos from 'pages/Favoritos';
 import Resultados from 'pages/Resultados';
 import SignUp from 'components/SignUp';
 import Login from 'components/Login'
+import AdminPanel from 'pages/AdminPanel';
+import CreateContent from 'pages/AdminPanel/CreateContent';
+import CreateUser from 'pages/AdminPanel/CreateUser';
 
 
 function AppRoutes() {
@@ -27,7 +30,10 @@ function AppRoutes() {
             <Route path="/favoritos" element = {< Favoritos /> } />
             <Route path="/about" element = {<AcercaDe />} />
             <Route path="/series" element = {<Series />} />
-            <Route path="/peliculas" element = {<Peliculas />} />            
+            <Route path="/peliculas" element = {<Peliculas />} />        
+            <Route path="/admin" element = {<AdminPanel />} />    
+            <Route path="/createContent" element = {<CreateContent />} />  
+            <Route path="/createUser" element = {<CreateUser />} />     
      </Routes>
     );
 }

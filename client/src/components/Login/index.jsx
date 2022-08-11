@@ -61,6 +61,7 @@ const[body, setBody] = useState({ email: '', password: '' })
                 })
                 sessionStorage.setItem('token', data.token)
                 sessionStorage.setItem('name', data.name)
+                sessionStorage.setItem('role', data.role)
                 navigate("/");
             }
             
@@ -82,7 +83,7 @@ const[body, setBody] = useState({ email: '', password: '' })
     <>
     
     <form onSubmit={submitHandler} className="d-flex flex-column align-items-center">
-    <h2 className ="my-3">Iniciar sesión</h2>
+    <h2 className ="my-3 text-center">Iniciar sesión</h2>
     <br/>
          <div className="mb-2">
              <label className="form-label">Nombre de Usuario

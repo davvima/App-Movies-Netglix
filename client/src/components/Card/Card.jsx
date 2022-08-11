@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addFavorites, getTrailer, removeFavorites } from '../../redux/actions';
 
 
-function Card({title,id,poster_path,overview,backdrop_path,category}){
+function Card({title,id,poster_path,overview,backdrop_path,category,created}){
 
     const [isHovered, setIsHovered] = useState(false);
     const iframeRef = useRef(null);
+
+     const StateCategories=useSelector(state=>state.categories)
+
 
     const dispatch = useDispatch()
 
@@ -37,7 +40,7 @@ function Card({title,id,poster_path,overview,backdrop_path,category}){
     }
 
     useEffect(() => {
-        dispatch(getTrailer(category, id))    
+        if(!created) dispatch(getTrailer(category, id))    
     },[dispatch,id,category]);
 
  /////////////////////////////////////////////HANDLE CLICK
@@ -51,7 +54,8 @@ function Card({title,id,poster_path,overview,backdrop_path,category}){
             poster_path,
             overview,
             category,
-            backdrop_path
+            backdrop_path,
+            created
        
         }
 
@@ -76,16 +80,17 @@ function Card({title,id,poster_path,overview,backdrop_path,category}){
      onMouseLeave={() => setIsHovered(false)}
         >     
 
-         <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+         <img src={!created?`https://image.tmdb.org/t/p/w500/${poster_path}`:poster_path}
          alt="poster"
          className='poster'
          style={{ display:isHovered?'none':'block'}}
          />
 
          {isHovered && (
-            <div>
+            <div className='cardHover'>
+                <figure className='img-container'>
                 {!trailerPath &&
-                <img src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`} alt="poster"
+                <img src={!created?`https://image.tmdb.org/t/p/w500/${backdrop_path}`:poster_path} alt="poster"
                 className='posterHover' />                
                 }
                 {trailerPath &&
@@ -96,6 +101,7 @@ function Card({title,id,poster_path,overview,backdrop_path,category}){
                 title="video"             
             ></iframe>
                 }
+                </figure>
 
                  
              <div className="itemInfo">
@@ -113,7 +119,6 @@ function Card({title,id,poster_path,overview,backdrop_path,category}){
                  Ver más
                  </Link> 
                  </div>
-                 <div className="genre">Action</div>
              </div>
             </div>
          

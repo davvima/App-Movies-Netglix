@@ -6,6 +6,10 @@ import './nav.css';
 
 const headerNav = [
     {
+        display: 'Admin',
+        path: '/admin'
+    },
+    {
         display: 'Peliculas',
         path: '/peliculas'
     },
@@ -20,7 +24,7 @@ const headerNav = [
     {
         display: 'Acerca de',
         path: '/about'
-    }
+    },
 ];
 
 function handleOnClick () {
@@ -43,12 +47,18 @@ return(
             <div className='nav-group'>
                <ul className="navbar-menu">
                    {
-                        headerNav.map ((e,i) => (
+                        headerNav.filter((e,i)=>i>0).map ((e,i) => (
                         <li key={i} className={`nav-item ${i === active ? 'active' : ''}`}>
                         <Link className="nav-link" to ={e.path} > {e.display} </Link>  
                         </li>   
-                        )) 
-                    }         
+                        ))}
+                    {
+                        sessionStorage.getItem('role') === 'admin' && 
+                        <li className={`nav-item ${0 === active ? 'active' : ''}`}>
+                        <Link className="nav-link" to ={headerNav[0].path} > {headerNav[0].display} </Link>  
+                        </li>
+                    }
+                      
                 </ul> 
 
                 <Buscador />

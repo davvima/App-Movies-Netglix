@@ -19,22 +19,24 @@ function Detalle(){
     let token = sessionStorage.getItem('token');
 
     const {movieID} = useParams();
-    const {params} = useParams();
-    console.log(params)
     const [details, setDetails] = useState({});
-    const stateDetails = useSelector(state=>state.details)
-    console.log(stateDetails)
+    const stateDetails =useSelector(state=>state.details)
+    console.log('details',details)
+    const flag = Object.entries(stateDetails).length === 0? true:false
 
     const dispatch= useDispatch()
+    useEffect(()=>{
+        
+        return ()=>{
+            dispatch(getDetails())
+        }
+    },[])
 
     useEffect(()=>{
         dispatch(getDetails(movieID,'movie'))
         setDetails(stateDetails)
 
-        return function unMount(){
-            setDetails({})
-        }
-      },[dispatch,stateDetails,movieID])
+      },[dispatch,movieID,flag])
 
     return(
     <>
@@ -53,26 +55,34 @@ function Detalle(){
             { Object.entries(details).length>0 && 
             <>
                 <div className="background" 
-                    style={{backgroundImage: `url(${apiConfig.originalImage(details.backdrop_path)})`}}>
+                    style={{backgroundImage: details.created?`url(${details.poster_path})` :`url(${apiConfig.originalImage(details.backdrop_path)})`}}>
                 </div> 
 
                 <div className="detail-container container">
                     <figure className='col-md-4'>             
-                        <img src={apiConfig.originalImage(details.poster_path)} className='img-fluid poster' alt='details poster' />
+                        <img src={details.created?details.poster_path:apiConfig.originalImage(details.poster_path)} className='img-fluid poster' alt='details poster' />
                     </figure>    
 
                     <div className="col-md-8 text-container" style={{color:'white'}}>
                         <br />
-                        <h1><strong>{details.title}</strong> ({details.release_date.substring(0,4)}) </h1>
-                        <h5>{`Título Original: ${details.original_title}`}</h5>
+                        
+                        <h1><strong>{details.title}</strong> ({details.release_date?details.release_date.substring(0,4):'2022'}) </h1>
+                        
+                        <h5>{`Título Original: ${details.original_title?details.original_title:details.title}`}</h5>
+                        
+                        {(details.vote_average && details.vote_count) &&
                         <h5>{`⭐ ${details.vote_average} / 10 (${details.vote_count} votos)`}</h5>
-                        <br />
+                        }<br />
+
                         <h5>Descripción:</h5>
                         <p>{details.overview}</p>
+                        {details.genres && 
+                        <>
                         <h5>Géneros</h5>
                         <ul>
-                            {details.genres.map(oneGenre => <li key={oneGenre.name}>{oneGenre.name}</li>)}
+                            {details.genres && details.genres.map(oneGenre => <li key={oneGenre.name}>{oneGenre.name}</li>)}
                         </ul>
+                        </>}
                     </div>
                 </div>
             </>

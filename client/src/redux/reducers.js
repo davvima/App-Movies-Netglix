@@ -13,7 +13,8 @@ let initialState = {
     tv:[]},
     trailers:[],
     favorites:tempMovies,
-    details:{}
+    details:{},
+    categories:[]
   };
   console.log('initial state',initialState.favorites)
 
@@ -45,6 +46,10 @@ let initialState = {
         case 'REMOVE_FAVORITE':
             return {...state,
             favorites:state.favorites.filter(e=>e.id !== action.payload)}
+
+        case 'GET_CATEGORIES':
+        return {...state,
+        categories:action.payload}
            
         default: return state;
         }

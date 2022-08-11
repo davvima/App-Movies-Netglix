@@ -34,6 +34,10 @@ const tmdbApi = {
     getVideos: (category,id,params) => {
         const url = `/${category}/${id}/videos`;
         return axiosClient.get(url, {params: {}});
+    },
+    getGenres:() =>{
+        const url ='genre/movie/list'
+        return axiosClient.get(url,{params:{}})
     }
 }
 

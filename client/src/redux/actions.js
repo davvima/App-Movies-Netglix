@@ -7,15 +7,16 @@ export const getContent = (category, type) => {
         return dispatch({
             type: 'GET_MOVIES',
             payload: {category,
-                content:response.results}
+                content:response}
         });
     };
 };
 
 export const getTrailer = (category, id)=>{
     return async function(dispatch){
-        const response  = await axiosClient.get(`http://localhost:4000/videos?category=${category}&id=${id}`)
         
+        const response  = await axiosClient.get(`http://localhost:4000/videos?category=${category}&id=${id}`)
+                
         return dispatch({
             type:'GET_TRAILER',
             payload: {id,path:response}
@@ -56,3 +57,15 @@ export const getDetails = (id,category) => {
         })
     }
 }}
+
+////////////////////////////////////////OBTENER CATEGORIAS
+
+export const getCategories = () => {
+    return async function(dispatch) {
+        const response = await axiosClient.get('http://localhost:4000/categories')
+            return dispatch({
+                type: 'GET_CATEGORIES',
+                payload: response
+            });
+    };
+};
