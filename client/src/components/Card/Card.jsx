@@ -115,7 +115,7 @@ function Card({title,id,poster_path,overview,backdrop_path,category,created}){
                     '🖤Agregar a Favoritos'}  </button>
                   </div>
                  <div className="desc">
-                     {overview.substring(0,200)+'...'} <Link to={`/detalle/movieID=${id}`} >  
+                     {overview.substring(0,200)+'...'} <Link to={`/detalle/{id}`} >  
                  Ver más
                  </Link> 
                  </div>
