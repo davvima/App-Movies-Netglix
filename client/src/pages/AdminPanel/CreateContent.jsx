@@ -47,7 +47,7 @@ const CreateContent = () => {
         };
 
     
-        axios.post('http://localhost:4000/content',input,config)
+        axios.post('https://netglix-api-deploy.herokuapp.com/content',input,config)
         .then(response=>{
           console.log(response)
           swal({

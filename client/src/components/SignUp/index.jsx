@@ -26,7 +26,7 @@ const Registro = () => {
         try{
         var response = await axiosClient({
             method: 'post',
-            url: 'http://localhost:4000/signup',
+            url: 'https://netglix-api-deploy.herokuapp.com/signup',
             data: body,
         })
         console.log(response)

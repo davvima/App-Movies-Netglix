@@ -2,7 +2,7 @@ import axiosClient from 'api/axiosClient'
 ////////////////////////////////////////GET MOVIES
 export const getContent = (category, type) => {
     return async function(dispatch) {
-        const response  = await axiosClient.get(`http://localhost:4000/movies?category=${category}&type=${type}`)
+        const response  = await axiosClient.get(`https://netglix-api-deploy.herokuapp.com/movies?category=${category}&type=${type}`)
       
         return dispatch({
             type: 'GET_MOVIES',
@@ -15,7 +15,7 @@ export const getContent = (category, type) => {
 export const getTrailer = (category, id)=>{
     return async function(dispatch){
         
-        const response  = await axiosClient.get(`http://localhost:4000/videos?category=${category}&id=${id}`)
+        const response  = await axiosClient.get(`https://netglix-api-deploy.herokuapp.com/videos?category=${category}&id=${id}`)
                 
         return dispatch({
             type:'GET_TRAILER',
@@ -45,7 +45,7 @@ export const getDetails = (id,category) => {
    
     return async (dispatch)=>{
         if(id && category){
-    const response = await axiosClient.get(`http://localhost:4000/movies/${id}?category=${category}`)
+    const response = await axiosClient.get(`https://netglix-api-deploy.herokuapp.com/movies/${id}?category=${category}`)
     return dispatch ({
         type:'GET_DETAILS',
         payload:response
@@ -62,7 +62,7 @@ export const getDetails = (id,category) => {
 
 export const getCategories = () => {
     return async function(dispatch) {
-        const response = await axiosClient.get('http://localhost:4000/categories')
+        const response = await axiosClient.get('https://netglix-api-deploy.herokuapp.com/categories')
             return dispatch({
                 type: 'GET_CATEGORIES',
                 payload: response

@@ -19,7 +19,7 @@ const ContentList = () => {
             headers: { Authorization: `Bearer ${token}` }
         }
     
-        axios.delete('http://localhost:4000/content/'+id,config)
+        axios.delete('https://netglix-api-deploy.herokuapp.com/content/'+id,config)
         .then(response=>{
             console.log(response)
             setDelete(!deleteContent)
@@ -38,7 +38,7 @@ const ContentList = () => {
             headers: { Authorization: `Bearer ${token}` }
         };
     
-        axios.get('http://localhost:4000/content',config)
+        axios.get('https://netglix-api-deploy.herokuapp.com/content',config)
         .then(response=>{
             console.log(response)
             setContent(response.data)
