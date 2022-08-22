@@ -51,7 +51,7 @@ const[body, setBody] = useState({ email: '', password: '' })
         //     return;
         // }
         
-        axios.post('http://localhost:4000/login', body)
+        axios.post('https://netglix-api-deploy.herokuapp.com/login', body)
         .then(({ data }) => {
             console.log(data)
             if(data.token){

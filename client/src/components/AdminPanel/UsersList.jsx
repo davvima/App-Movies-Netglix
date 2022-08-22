@@ -17,7 +17,7 @@ const UsersList = () => {
             headers: { Authorization: `Bearer ${token}` }
         }
     
-        axios.delete('http://localhost:4000/users/'+id,config)
+        axios.delete('https://netglix-api-deploy.herokuapp.com/users/'+id,config)
         .then(response=>{
             console.log(response)
         })
@@ -30,7 +30,7 @@ const UsersList = () => {
             headers: { Authorization: `Bearer ${token}` }
         };
     
-        axios.get('http://localhost:4000/users',config)
+        axios.get('https://netglix-api-deploy.herokuapp.com/users',config)
         .then(response=>{
             setUsers(response.data)
         })
