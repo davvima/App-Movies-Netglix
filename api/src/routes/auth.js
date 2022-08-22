@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport')
 const jwt = require('jsonwebtoken');
-const { addUser } = require('../../../../Curso Henry/FT-M3-master/CP-M3/CPM3/models/model');
 const pool = require('../database');
 
 //LOGIN

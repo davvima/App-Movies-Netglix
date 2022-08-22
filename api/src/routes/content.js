@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {getContentList,getVideos, getDbList, deleteContent, getGenres, getApiDetail, getDbDetail} = require('../controllers/content');
+const {getVideos, getDbList, deleteContent, getGenres, getApiDetail, getApiList} = require('../controllers/content');
 const pool = require('../database');
 const { checkAuth } = require('../lib/auth');
 
@@ -8,7 +8,7 @@ const { checkAuth } = require('../lib/auth');
 
 router.get('/movies', async (req, res)=>{
     const {category, type} = req.query
-    const response = await getContentList(category,type)
+    const response = await getApiList(category,type)
     res.json(response)
 })
 
@@ -77,7 +77,6 @@ router.post('/content',checkAuth(['admin']), async (req,res)=>{
         poster_path,
         overview,
         category,
-        backdrop_path,
     } = req.body
 
     try{
@@ -86,7 +85,6 @@ router.post('/content',checkAuth(['admin']), async (req,res)=>{
             poster_path,
             overview,
             category,
-            backdrop_path:'',
         }
 
         const result = await pool.query('INSERT INTO content SET ? ', newContent);

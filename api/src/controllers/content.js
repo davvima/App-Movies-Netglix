@@ -2,10 +2,10 @@ const apiConfig = require('../apiTmdb/apiConfig')
 const {category, tmdbApi} = require ('../apiTmdb/tmdbApi')
 const pool = require("../database")
 
-const getDbList = async ()=>{
-    const response =  await pool.query('SELECT * FROM content')
-    return response
-} 
+// const getDbList = async ()=>{
+//     const response =  await pool.query('SELECT * FROM content')
+//     return response
+// } 
 
 const getApiList = async (ClientCategory,type) =>{
     const params = {}
@@ -22,12 +22,12 @@ const getApiList = async (ClientCategory,type) =>{
     return response.results
 }
 
-const getContentList = async (category,type) =>{
-    const apiInfo = await getApiList(category,type)
-    const dbInfo = await getDbList()
-    const info = [...dbInfo,...apiInfo]
-    return info
-}
+// const getContentList = async (category,type) =>{
+//     const apiInfo = await getApiList(category,type)
+//     const dbInfo = await getDbList()
+//     const info = [...dbInfo,...apiInfo]
+//     return info
+// }
 
 const getVideos = async(category, id)=>{
     const response = await tmdbApi.getVideos(category, id);
@@ -40,10 +40,10 @@ const getVideos = async(category, id)=>{
     return trailerPath
 }
 
-const getDbDetail = async(id)=>{
-    const response = pool.query(`SELECT * FROM content WHERE id='${id}'`)
-    return response
-}
+// const getDbDetail = async(id)=>{
+//     const response = pool.query(`SELECT * FROM content WHERE id='${id}'`)
+//     return response
+// }
 
 const getApiDetail = async(category,id)=>{
     const response = await tmdbApi.detail(category,id)
@@ -76,4 +76,4 @@ const getGenres = async()=>{
     return categories 
 }
     
-module.exports =  {getContentList,getVideos,getApiDetail,getDbList,deleteContent,getGenres,getDbDetail}
+module.exports =  {getApiList,getVideos,getApiDetail,deleteContent,getGenres}
