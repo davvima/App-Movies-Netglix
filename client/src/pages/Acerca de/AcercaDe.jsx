@@ -53,12 +53,11 @@ function AcercaDe() {
              
             <h4>Desarrollado por: <strong>David Freites</strong> </h4>
             <div className='about-links my-3'>
-            <button className="button" onClick={()=>window.open('https://www.linkedin.com/in/david-freites-frontend-developer','_blank')}> LinkedIn
-            </button>
+                <button className="button" onClick={()=>window.open('https://www.linkedin.com/in/david-freites-frontend-developer','_blank')}> LinkedIn
+                </button>
 
-            <button className="button" onClick={()=>window.open('https://github.com/davvima','_blank')}> Github
-            </button>
-
+                <button className="button" onClick={()=>window.open('https://github.com/davvima','_blank')}> Github
+                </button>
             </div>
             
         </div>

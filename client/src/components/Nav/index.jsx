@@ -47,11 +47,13 @@ return(
             <div className='nav-group'>
                <ul className="navbar-menu">
                    {
-                        headerNav.filter((e,i)=>i>0).map ((e,i) => (
+                        headerNav.map ((e,i) => {
+                            if(i!==0)return(
                         <li key={i} className={`nav-item ${i === active ? 'active' : ''}`}>
                         <Link className="nav-link" to ={e.path} > {e.display} </Link>  
                         </li>   
-                        ))}
+                        )}
+                        )}
                     {
                         sessionStorage.getItem('role') === 'admin' && 
                         <li className={`nav-item ${0 === active ? 'active' : ''}`}>
